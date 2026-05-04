@@ -1,64 +1,123 @@
-![Astro Nano](_astro_nano.png)
+# mehtaz23.github.io
 
-Astro Nano is a static, minimalist, lightweight, lightning fast portfolio and blog theme.
+Personal portfolio site for Muntaqim Mehtaz — built with [Astro](https://astro.build), Tailwind CSS, and TypeScript.
 
-Built with Astro, Tailwind and Typescript, an no frameworks.
+**Live:** [mehtaz23.github.io](https://mehtaz23.github.io)
 
-It was designed as an even more minimal theme than my popular theme [Astro Sphere](https://github.com/markhorn-dev/astro-sphere)
+---
 
-## 🚀 Deploy your own
+## Stack
 
-[![Deploy with Vercel](_deploy_vercel.svg)](https://vercel.com/new/clone?repository-url=https://github.com/markhorn-dev/astro-nano)  [![Deploy with Netlify](_deploy_netlify.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/markhorn-dev/astro-nano)
+| Layer | Tool |
+| :--- | :--- |
+| Framework | Astro |
+| Styling | Tailwind CSS |
+| Language | TypeScript |
+| Package manager | Bun |
+| Hosting | GitHub Pages |
+| CI/CD | GitHub Actions — deploys on push to `main` |
 
-## 📋 Features
+---
 
-- ✅ 100/100 Lighthouse performance
-- ✅ Responsive
-- ✅ Accessible
-- ✅ SEO-friendly
-- ✅ Typesafe
-- ✅ Minimal style
-- ✅ Light/Dark Theme
-- ✅ Animated UI
-- ✅ Tailwind styling
-- ✅ Auto generated sitemap
-- ✅ Auto generated RSS Feed
-- ✅ Markdown support
-- ✅ MDX Support (components in your markdown)
+## Content
 
-## 💯 Lighthouse score
-![Astro Nano Lighthouse Score](_lighthouse.png)
+Content lives in `src/content/` and is written in Markdown.
 
-## 🕊️ Lightweight
-No frameworks or added bulk
+| Section | Path | Description |
+| :--- | :--- | :--- |
+| Blog | `src/content/blog/` | Technical posts — one folder per post with an `index.md` |
+| Projects | `src/content/projects/` | Project breakdowns — same folder/`index.md` structure |
+| Work | `src/content/work/` | Work history entries |
 
-## ⚡︎ Fast
-Rendered in ~40ms on localhost
+### Adding a blog post
 
-## 📄 Configuration
+```
+src/content/blog/
+└── your-post-slug/
+    └── index.md
+```
 
-The blog posts on the demo serve as the documentation and configuration.
+Required frontmatter:
 
-## 💻 Commands
+```md
+---
+title: "Post title"
+description: "Short description shown in listings and meta tags."
+date: "Mon DD YYYY"
+---
+```
 
-All commands are run from the root of the project, from a terminal:
+### Adding a project
 
-Replace bun with your package manager of choice. `bun`, `pnpm`, `yarn`, `bun`, etc
+```
+src/content/projects/
+└── your-project-slug/
+    └── index.md
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun dev:network`     | Starts local dev server on local network         |
-| `bun sync`            | Generates TypeScript types for all Astro modules.|
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun preview:network` | Preview build on local network                   |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
-| `bun lint`            | Run ESLint                                       |
-| `bun lint:fix`        | Auto-fix ESLint issues                           |
+Required frontmatter:
 
-## 🏛️ License
+```md
+---
+title: "Project title"
+description: "Short description."
+date: "Mon DD YYYY"
+repoURL: "https://github.com/..."   # optional
+demoURL: "https://..."              # optional
+---
+```
+
+### Images
+
+Static assets are served from `public/`. Project and post images live under:
+
+```
+public/images/<project-or-post-slug>/image.webp
+```
+
+Reference them in Markdown with a root-relative path: `/images/<slug>/image.webp`.
+
+---
+
+## Local Development
+
+```bash
+bun install       # install dependencies
+bun dev           # start dev server at localhost:4321
+bun build         # production build to ./dist
+bun preview       # preview production build locally
+bun lint          # run ESLint
+bun lint:fix      # auto-fix ESLint issues
+```
+
+---
+
+## Deployment
+
+Pushes to `main` trigger the GitHub Actions workflow at `.github/workflows/deploy.yml`, which:
+
+1. Installs dependencies with Bun
+2. Runs `astro build`
+3. Uploads `./dist` as a Pages artifact
+4. Deploys to GitHub Pages
+
+No manual steps required after merging to `main`.
+
+---
+
+## Mermaid Diagrams
+
+Mermaid diagrams are supported in Markdown via a custom remark plugin in `astro.config.mjs`. Use a standard fenced code block with the `mermaid` language identifier:
+
+````md
+```mermaid
+sequenceDiagram
+    ...
+```
+````
+
+---
+
+## License
 
 MIT
